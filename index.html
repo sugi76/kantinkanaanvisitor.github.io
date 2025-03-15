@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scan QR Code</title>
+  <script>
+    async function sendEmail() {
+      // Ambil email pengunjung dari browser
+      const email = "<?php echo $_GET['email']; ?>"; // Jika menggunakan PHP
+      // Atau gunakan JavaScript untuk mengambil email dari browser (jika memungkinkan)
+
+      // Kirim data ke Google Apps Script
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxhHtctWcv2A36u0GUNGpkqDnmFW4vm-lVtLCtw1mmXT3U0X486h4CCRkyRjgH3vtohnw/exec', {
+        method: 'POST',
+        body: JSON.stringify({ email: email }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      // Tampilkan feedback ke pengunjung
+      const result = await response.text();
+      alert(result);
+    }
+
+    // Jalankan fungsi saat halaman dimuat
+    window.onload = sendEmail;
+  </script>
+</head>
+<body>
+  <h1>Scan QR Code</h1>
+</body>
+</html>
